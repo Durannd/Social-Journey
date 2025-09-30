@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jogo de Escolhas - Social Credits</title>
+  <link rel="stylesheet" href="styles_Version2.css">
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <h1>Social Journey</h1>
+      <div class="stats">
+        <span>Social Credits: <strong id="sc">0</strong></span>
+        <span>ETEPs: <strong id="etep">0</strong>/3</span>
+        <span>Personagem: <strong id="char">—</strong></span>
+      </div>
+    </header>
+
+    <main id="game">
+      <div id="scene">
+        <!-- Camada de sprite (personagem parado “se mexendo” em 2 frames) -->
+        <div id="sprite-layer">
+          <img id="char-sprite" alt="Personagem" />
+        </div>
+
+        <div id="scene-text"></div>
+        <div id="choices"></div>
+      </div>
+
+      <div id="end-screen" class="hidden">
+        <h2 id="end-title"></h2>
+        <p id="end-message"></p>
+        <button id="restart-btn">Jogar novamente</button>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <small>Feito em HTML/CSS/JS. Você pode publicar no GitHub Pages facilmente.</small>
+    </footer>
+  </div>
+
+  
+  <script type="module" src="sprites_Version2.js"></script>
+  <script type="module" src="game_Version2.js"></script>
+</body>
+</html>
