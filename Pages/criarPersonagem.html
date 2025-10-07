@@ -80,6 +80,7 @@
 
             confirmBtn.addEventListener('click', () => {
                 const playerName = nameInput.value.trim();
+                
                 sessionStorage.setItem('player_name', playerName);
                 sessionStorage.setItem('player_sprite', selected.img);
                 sessionStorage.setItem('etep', '0');
