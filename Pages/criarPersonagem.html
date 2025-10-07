@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crie um personagem!</title>
+    <link rel="stylesheet" href="../Styles/styles_CriarPersonagem.css">
+</head>
+
+<body>
+    <div class="container-principal">
+        <div class="nome">
+            <form id="char-form" autocomplete="off" onsubmit="return false;">
+                <label for="player-name">Digite seu nome aqui:</label>
+                <input id="player-name" name="playerName" type="text" placeholder="Ex: Usuario123" minlength="2"
+                    maxlength="20" required>
+            </form>
+        </div>
+
+
+        <div class="personagens" id="character-grid" aria-label="Seleção de personagens">
+
+            <button class="box" data-img="../Assets/Personagens_Usuario/menina_black.png" type="button">
+                <img src="../Assets/Personagens_Usuario/menina_black.png" alt="Personagem Menina Black">
+            </button>
+            <button class="box" data-img="../Assets/Personagens_Usuario/menina_loira.png" type="button">
+                <img src="../Assets/Personagens_Usuario/menina_loira.png" alt="Personagem Menina Loira">
+            </button>
+            <button class="box" data-img="../Assets/Personagens_Usuario/menino_black.png" type="button">
+                <img src="../Assets/Personagens_Usuario/menino_black.png" alt="Personagem Menino Black">
+            </button>
+            <button class="box" data-img="../Assets/Personagens_Usuario/menino_pardo.png" type="button">
+                <img src="../Assets/Personagens_Usuario/menino_pardo.png" alt="Personagem Menino Pardo">
+            </button>
+            <button class="box" data-img="../Assets/Personagens_Usuario/menino_preto.png" type="button">
+                <img src="../Assets/Personagens_Usuario/menino_preto.png" alt="Personagem Menino Preto">
+            </button>
+        </div>
+
+        <div class="confirm-area">
+            <button id="confirm-btn" type="button" disabled>Ir Para o Jogo</button>
+
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const boxes = document.querySelectorAll('.box');
+            const nameInput = document.getElementById('player-name');
+            const confirmBtn = document.getElementById('confirm-btn');
+            let selected = null;
+
+            function updateButtonState() {
+                confirmBtn.disabled = !(selected && nameInput.value.trim().length >= 2);
+            }
+
+            nameInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !confirmBtn.disabled) {
+                    confirmBtn.click();
+                }
+            });
+
+            boxes.forEach(box => {
+                box.addEventListener('click', () => {
+                    boxes.forEach(b => b.classList.remove('selected'));
+                    box.classList.add('selected');
+                    selected = {
+                        img: box.dataset.img,
+                    };
+
+                    updateButtonState();
+                });
+                box.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); box.click(); }
+                });
+            });
+
+            nameInput.addEventListener('input', updateButtonState);
+
+            confirmBtn.addEventListener('click', () => {
+                const playerName = nameInput.value.trim();
+                sessionStorage.setItem('player_name', playerName);
+                sessionStorage.setItem('player_sprite', selected.img);
+
+                window.location.href = 'jogoFr.html';
+                confirmBtn.disabled = true;
+
+            });
+        })();
+    </script>
+</body>
+
+</html>
